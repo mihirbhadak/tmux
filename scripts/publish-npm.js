@@ -8,7 +8,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { execFileSync } = require('child_process');
+const { spawnSync } = require('child_process');
 
 const NPM_NAME = '@mihir_bhadak/tmux';
 const ROOT = path.join(__dirname, '..');
@@ -37,6 +37,9 @@ fs.writeFileSync(
 
 const args = ['publish', '--access', 'public', ...process.argv.slice(2)];
 console.log(`Publishing ${NPM_NAME}@${manifest.version} from ${stage}`);
-execFileSync('npm', args, { cwd: stage, stdio: 'inherit', shell: process.platform === 'win32' });
+
+const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+const result = spawnSync(npm, args, { cwd: stage, stdio: 'inherit' });
 
 fs.rmSync(stage, { recursive: true, force: true });
+process.exit(result.status ?? 1);
