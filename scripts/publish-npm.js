@@ -30,16 +30,28 @@ for (const entry of INCLUDE) {
   }
 }
 
-fs.writeFileSync(
-  path.join(stage, 'package.json'),
-  JSON.stringify({ ...manifest, name: NPM_NAME }, null, 2) + '\n'
-);
+// `private` guards the source manifest against an accidental bare `npm publish`
+// in the project root; the staged copy is the only thing meant to go out.
+const staged = { ...manifest, name: NPM_NAME };
+delete staged.private;
+
+fs.writeFileSync(path.join(stage, 'package.json'), JSON.stringify(staged, null, 2) + '\n');
+
+// An .npmignore (even empty) stops npm falling back to .gitignore, which
+// excludes out/ — the very thing we need to ship.
+fs.writeFileSync(path.join(stage, '.npmignore'), '');
 
 const args = ['publish', '--access', 'public', ...process.argv.slice(2)];
-console.log(`Publishing ${NPM_NAME}@${manifest.version} from ${stage}`);
+console.log(`Publishing ${NPM_NAME}@${manifest.version} from ${stage}\n`);
 
-const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-const result = spawnSync(npm, args, { cwd: stage, stdio: 'inherit' });
+// npm is npm.cmd on Windows, which Node refuses to spawn without a shell
+// (CVE-2024-27980). Without `shell` this fails EINVAL and prints nothing.
+const result = spawnSync('npm', args, { cwd: stage, stdio: 'inherit', shell: true });
 
 fs.rmSync(stage, { recursive: true, force: true });
+
+if (result.error) {
+  console.error(`Failed to run npm: ${result.error.message}`);
+  process.exit(1);
+}
 process.exit(result.status ?? 1);
