@@ -2,7 +2,11 @@
 
 ## 0.7.1
 
-- Published to npm as [`@mihir_bhadak/tmux`](https://www.npmjs.com/package/@mihir_bhadak/tmux).
+- First published release: VS Code Marketplace and Open VSX (Cursor) as
+  `mihirbhadak.tmux`. `publisher` is no longer the `local` placeholder.
+- Added a 128×128 PNG Marketplace icon; the Marketplace rejects SVG icons, so
+  `resources/icon.svg` stays the themeable 24×24 Activity Bar glyph and
+  `resources/icon-source.svg` is the artwork the PNG is rendered from.
 - Added a `LICENSE` file (the manifest already declared MIT), plus `author`,
   `keywords`, `repository`, `homepage` and `bugs` metadata.
 - Docs: removed a stale note about `src/webviewTerminal.ts` and an

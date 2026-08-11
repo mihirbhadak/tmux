@@ -1,6 +1,7 @@
 # tmux
 
-[![npm](https://img.shields.io/npm/v/@mihir_bhadak/tmux)](https://www.npmjs.com/package/@mihir_bhadak/tmux)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/mihirbhadak.tmux?label=VS%20Code%20Marketplace)](https://marketplace.visualstudio.com/items?itemName=mihirbhadak.tmux)
+[![Open VSX](https://img.shields.io/open-vsx/v/mihirbhadak/tmux?label=Open%20VSX)](https://open-vsx.org/extension/mihirbhadak/tmux)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 A lightweight VS Code / Cursor extension that lists the SSH hosts from your
@@ -107,39 +108,30 @@ the remote.
 
 ## Install
 
-The extension is not on the VS Code Marketplace; install it from a `.vsix`.
+**VS Code** — search `tmux` in the Extensions view, or:
 
-Build one from source:
+```bash
+code --install-extension mihirbhadak.tmux
+```
+
+**Cursor** — Cursor installs from [Open VSX](https://open-vsx.org/extension/mihirbhadak/tmux)
+rather than the VS Code Marketplace; search `tmux` in the Extensions view, or:
+
+```bash
+cursor --install-extension mihirbhadak.tmux
+```
+
+### From a .vsix
 
 ```bash
 git clone https://github.com/mihirbhadak/tmux.git
 cd tmux
 npm install
-npx @vscode/vsce package --no-dependencies
-```
-
-Then install the `tmux-<version>.vsix` it produces:
-
-```bash
-code --install-extension tmux-0.7.1.vsix
-# Cursor:
-cursor --install-extension tmux-0.7.1.vsix
+npm run package
+code --install-extension tmux-<version>.vsix   # or: cursor --install-extension
 ```
 
 Or: Extensions view → `...` menu → **Install from VSIX…**
-
-### From npm
-
-The compiled extension is also published to npm:
-
-```bash
-npm install @mihir_bhadak/tmux
-```
-
-Note this is a distribution channel only — VS Code loads extensions from a
-`.vsix`, not from `node_modules`, so installing the npm package does not
-install the extension. Use it to vendor the build output; use the `.vsix`
-above to actually run it.
 
 ## Build
 
@@ -153,16 +145,18 @@ Press `F5` in VS Code to launch an Extension Development Host.
 ## Publishing
 
 ```bash
-npm run publish:npm            # publishes @mihir_bhadak/tmux
-npm run publish:npm -- --otp=123456
+npm run package          # build a .vsix locally
+npm run publish:vscode   # VS Code Marketplace (needs an Azure DevOps PAT)
+npm run publish:ovsx     # Open VSX, which is what Cursor installs from
 ```
 
-The VS Code manifest requires `name` to be a plain identifier, so `vsce`
-rejects a scoped name. `scripts/publish-npm.js` therefore stages the build
-output into a temp directory with a rewritten manifest and publishes from
-there, leaving `package.json` untouched. The source manifest is marked
-`private` so a stray `npm publish` in the project root cannot publish the
-unscoped name by accident.
+`vsce` authenticates with `vsce login mihirbhadak` or `VSCE_PAT`; `ovsx` uses
+`OVSX_PAT`. Both registries need to be published to for the extension to be
+installable in both editors.
+
+The manifest is marked `private` so it can never be published to npm by
+accident — this is a VS Code extension, and npm is not a distribution channel
+for it.
 
 ## Notes / design choices
 

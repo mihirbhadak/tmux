@@ -1,9 +1,12 @@
 .vscode/**
+.claude/**
 src/**
-scripts/**
 **/*.ts
 **/*.map
 tsconfig.json
 .gitignore
 .git/**
 node_modules/**
+package-lock.json
+resources/icon-source.svg
+.playwright-mcp/**
