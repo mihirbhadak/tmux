@@ -8,6 +8,14 @@
   "engines": {
     "vscode": "^1.93.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mihirbhadak/tmux.git"
+  },
+  "homepage": "https://github.com/mihirbhadak/tmux#readme",
+  "bugs": {
+    "url": "https://github.com/mihirbhadak/tmux/issues"
+  },
   "categories": [
     "Other"
   ],
@@ -122,7 +130,8 @@
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "vscode:prepublish": "npm run compile"
+    "vscode:prepublish": "npm run compile",
+    "publish:npm": "npm run compile && node scripts/publish-npm.js"
   },
   "devDependencies": {
     "@types/node": "^18.19.0",
