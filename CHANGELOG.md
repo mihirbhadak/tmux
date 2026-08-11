@@ -2,12 +2,13 @@
 
 ## 0.7.1
 
+- **Renamed to MySSH.** The extension was previously called `tmux`, a name
+  already held by another publisher on the Marketplace (names there are
+  globally unique, not scoped per publisher). Commands, settings, the view
+  container and the stored-state keys all moved from `tmux.*` to `myssh.*`,
+  and the repository is now `mihirbhadak/MySSH`.
 - First published release: VS Code Marketplace and Open VSX (Cursor) as
-  `mihirbhadak.mihir-bhadak-tmux`. `publisher` is no longer the `local`
-  placeholder. The extension is still displayed as **tmux** — only the
-  identifier changed, because Marketplace names are globally unique and `tmux`
-  is held by another publisher. Extension names allow only lowercase letters,
-  digits and hyphens (no `@`, `/` or `_`).
+  `mihirbhadak.myssh`. `publisher` is no longer the `local` placeholder.
 - Added a 128×128 PNG Marketplace icon; the Marketplace rejects SVG icons, so
   `resources/icon.svg` stays the themeable 24×24 Activity Bar glyph and
   `resources/icon-source.svg` is the artwork the PNG is rendered from.

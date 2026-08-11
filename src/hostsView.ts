@@ -67,12 +67,12 @@ export class HostsViewProvider implements vscode.WebviewViewProvider {
   }
 
   private sendShowHidden(): void {
-    vscode.commands.executeCommand('setContext', 'tmux.showHidden', this.showHidden);
+    vscode.commands.executeCommand('setContext', 'myssh.showHidden', this.showHidden);
     this.view?.webview.postMessage({ type: 'showHidden', value: this.showHidden });
   }
 
   private readKeys(): Keys {
-    const c = vscode.workspace.getConfiguration('tmux.keys');
+    const c = vscode.workspace.getConfiguration('myssh.keys');
     return { find: c.get('find', 'ctrl+f') };
   }
 

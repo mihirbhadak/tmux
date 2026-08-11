@@ -97,7 +97,7 @@ export class TerminalManager {
   constructor(private readonly store: Store) {}
 
   private notify(): boolean {
-    return vscode.workspace.getConfiguration('tmux').get('notifications', true);
+    return vscode.workspace.getConfiguration('myssh').get('notifications', true);
   }
 
   connect(host: string): void {

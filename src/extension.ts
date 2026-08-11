@@ -16,30 +16,30 @@ export function activate(context: vscode.ExtensionContext): void {
   const store = new Store(context.globalState);
   const terminals = new TerminalManager(store);
   const view = new HostsViewProvider(context.extensionUri, store, terminals);
-  vscode.commands.executeCommand('setContext', 'tmux.showHidden', false);
+  vscode.commands.executeCommand('setContext', 'myssh.showHidden', false);
 
   context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider('tmux.hosts', view, {
+    vscode.window.registerWebviewViewProvider('myssh.hosts', view, {
       webviewOptions: { retainContextWhenHidden: true },
     }),
 
-    vscode.commands.registerCommand('tmux.refreshHosts', () => view.refresh()),
-    vscode.commands.registerCommand('tmux.searchHosts', () => view.focusSearch()),
+    vscode.commands.registerCommand('myssh.refreshHosts', () => view.refresh()),
+    vscode.commands.registerCommand('myssh.searchHosts', () => view.focusSearch()),
 
-    vscode.commands.registerCommand('tmux.connectHost', (arg) => {
+    vscode.commands.registerCommand('myssh.connectHost', (arg) => {
       const host = hostOf(arg);
       if (host) terminals.connect(host);
     }),
 
-    vscode.commands.registerCommand('tmux.copyCommand', (arg) => {
+    vscode.commands.registerCommand('myssh.copyCommand', (arg) => {
       const host = hostOf(arg);
       if (host) vscode.env.clipboard.writeText(`ssh ${host}`);
     }),
 
-    vscode.commands.registerCommand('tmux.showHidden', () => view.toggleHidden()),
-    vscode.commands.registerCommand('tmux.hideHidden', () => view.toggleHidden()),
+    vscode.commands.registerCommand('myssh.showHidden', () => view.toggleHidden()),
+    vscode.commands.registerCommand('myssh.hideHidden', () => view.toggleHidden()),
 
-    vscode.commands.registerCommand('tmux.openConfig', async () => {
+    vscode.commands.registerCommand('myssh.openConfig', async () => {
       const p = sshConfigPath();
       if (!fs.existsSync(p)) {
         fs.mkdirSync(path.dirname(p), { recursive: true });
@@ -49,7 +49,7 @@ export function activate(context: vscode.ExtensionContext): void {
     }),
 
     vscode.workspace.onDidChangeConfiguration((e) => {
-      if (e.affectsConfiguration('tmux.keys')) view.sendKeys();
+      if (e.affectsConfiguration('myssh.keys')) view.sendKeys();
     })
   );
 

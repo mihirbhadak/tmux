@@ -15,7 +15,7 @@ export interface HostMeta {
 }
 
 /** Local temp file that mirrors each host's last directory. */
-const DIR_FILE = path.join(os.tmpdir(), 'tmux-lastdirs.json');
+const DIR_FILE = path.join(os.tmpdir(), 'myssh-lastdirs.json');
 
 type MetaMap = Record<string, { lastConnected?: number; pinned?: boolean; hidden?: boolean }>;
 
@@ -25,7 +25,7 @@ type MetaMap = Record<string, { lastConnected?: number; pinned?: boolean; hidden
  * there. Any write fires onDidChange so the sidebar updates instantly.
  */
 export class Store {
-  private static readonly KEY = 'tmux.meta';
+  private static readonly KEY = 'myssh.meta';
   private dirs: Record<string, string> = {};
   private readonly _onDidChange = new vscode.EventEmitter<void>();
   readonly onDidChange = this._onDidChange.event;

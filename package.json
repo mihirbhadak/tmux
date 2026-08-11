@@ -1,6 +1,6 @@
 {
-  "name": "mihir-bhadak-tmux",
-  "displayName": "tmux",
+  "name": "myssh",
+  "displayName": "MySSH",
   "description": "Lightweight SSH host sidebar that opens SSH sessions as terminal editor tabs. Runs locally even over Remote SSH.",
   "version": "0.7.1",
   "publisher": "mihirbhadak",
@@ -10,7 +10,7 @@
   "author": "Mihir Bhadak <mihirbhadak@gmail.com>",
   "keywords": [
     "ssh",
-    "tmux",
+    "myssh",
     "terminal",
     "remote",
     "ssh-config",
@@ -22,11 +22,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mihirbhadak/tmux.git"
+    "url": "git+https://github.com/mihirbhadak/MySSH.git"
   },
-  "homepage": "https://github.com/mihirbhadak/tmux#readme",
+  "homepage": "https://github.com/mihirbhadak/MySSH#readme",
   "bugs": {
-    "url": "https://github.com/mihirbhadak/tmux/issues"
+    "url": "https://github.com/mihirbhadak/MySSH/issues"
   },
   "categories": [
     "Other"
@@ -40,22 +40,22 @@
   ],
   "main": "./out/extension.js",
   "activationEvents": [
-    "onView:tmux.hosts"
+    "onView:myssh.hosts"
   ],
   "contributes": {
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "tmux",
-          "title": "tmux",
+          "id": "myssh",
+          "title": "MySSH",
           "icon": "resources/icon.svg"
         }
       ]
     },
     "views": {
-      "tmux": [
+      "myssh": [
         {
-          "id": "tmux.hosts",
+          "id": "myssh.hosts",
           "name": "Hosts",
           "type": "webview"
         }
@@ -63,79 +63,79 @@
     },
     "commands": [
       {
-        "command": "tmux.refreshHosts",
+        "command": "myssh.refreshHosts",
         "title": "Refresh Hosts",
-        "category": "tmux",
+        "category": "MySSH",
         "icon": "$(refresh)"
       },
       {
-        "command": "tmux.searchHosts",
+        "command": "myssh.searchHosts",
         "title": "Search Hosts",
-        "category": "tmux",
+        "category": "MySSH",
         "icon": "$(search)"
       },
       {
-        "command": "tmux.connectHost",
+        "command": "myssh.connectHost",
         "title": "Connect",
-        "category": "tmux"
+        "category": "MySSH"
       },
       {
-        "command": "tmux.copyCommand",
+        "command": "myssh.copyCommand",
         "title": "Copy SSH Command",
-        "category": "tmux"
+        "category": "MySSH"
       },
       {
-        "command": "tmux.openConfig",
+        "command": "myssh.openConfig",
         "title": "Open SSH Config",
-        "category": "tmux",
+        "category": "MySSH",
         "icon": "$(edit)"
       },
       {
-        "command": "tmux.showHidden",
+        "command": "myssh.showHidden",
         "title": "Show Hidden Hosts",
-        "category": "tmux",
+        "category": "MySSH",
         "icon": "$(eye)"
       },
       {
-        "command": "tmux.hideHidden",
+        "command": "myssh.hideHidden",
         "title": "Hide Hidden Hosts",
-        "category": "tmux",
+        "category": "MySSH",
         "icon": "$(eye-closed)"
       }
     ],
     "menus": {
       "view/title": [
         {
-          "command": "tmux.showHidden",
-          "when": "view == tmux.hosts && !tmux.showHidden",
+          "command": "myssh.showHidden",
+          "when": "view == myssh.hosts && !myssh.showHidden",
           "group": "navigation@2"
         },
         {
-          "command": "tmux.hideHidden",
-          "when": "view == tmux.hosts && tmux.showHidden",
+          "command": "myssh.hideHidden",
+          "when": "view == myssh.hosts && myssh.showHidden",
           "group": "navigation@2"
         },
         {
-          "command": "tmux.refreshHosts",
-          "when": "view == tmux.hosts",
+          "command": "myssh.refreshHosts",
+          "when": "view == myssh.hosts",
           "group": "navigation@3"
         },
         {
-          "command": "tmux.openConfig",
-          "when": "view == tmux.hosts",
+          "command": "myssh.openConfig",
+          "when": "view == myssh.hosts",
           "group": "navigation@4"
         }
       ]
     },
     "configuration": {
-      "title": "tmux",
+      "title": "MySSH",
       "properties": {
-        "tmux.notifications": {
+        "myssh.notifications": {
           "type": "boolean",
           "default": true,
           "description": "Show a notification when an SSH session connects or disconnects."
         },
-        "tmux.keys.find": {
+        "myssh.keys.find": {
           "type": "string",
           "default": "ctrl+f",
           "markdownDescription": "Sidebar shortcut to focus the search box."

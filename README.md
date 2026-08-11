@@ -1,7 +1,7 @@
-# tmux
+# MySSH
 
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/mihirbhadak.mihir-bhadak-tmux?label=VS%20Code%20Marketplace)](https://marketplace.visualstudio.com/items?itemName=mihirbhadak.mihir-bhadak-tmux)
-[![Open VSX](https://img.shields.io/open-vsx/v/mihirbhadak/mihir-bhadak-tmux?label=Open%20VSX)](https://open-vsx.org/extension/mihirbhadak/mihir-bhadak-tmux)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/mihirbhadak.myssh?label=VS%20Code%20Marketplace)](https://marketplace.visualstudio.com/items?itemName=mihirbhadak.myssh)
+[![Open VSX](https://img.shields.io/open-vsx/v/mihirbhadak/myssh?label=Open%20VSX)](https://open-vsx.org/extension/mihirbhadak/myssh)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 A lightweight VS Code / Cursor extension that lists the SSH hosts from your
@@ -15,7 +15,7 @@ the window is attached to a remote host via Remote SSH.
 
 ## Features
 
-- **Activity Bar icon** named `tmux` → searchable list of your hosts.
+- **Activity Bar icon** named `MySSH` → searchable list of your hosts.
 - **SSH config discovery** — reads `~/.ssh/config`
   (`%USERPROFILE%\.ssh\config` on Windows). Wildcard entries (`Host *`) are
   ignored.
@@ -31,10 +31,10 @@ the window is attached to a remote host via Remote SSH.
   the list and appear in a lighter colour. The **eye** button in the view title
   toggles showing hidden hosts so you can unhide them.
 - **Open SSH Config** — the ✎ button in the view title (and
-  `tmux: Open SSH Config`) opens `~/.ssh/config` in the editor; saving it
+  `MySSH: Open SSH Config`) opens `~/.ssh/config` in the editor; saving it
   refreshes the list automatically.
 - **Notifications** — a toast on connect and disconnect (the disconnect toast
-  has a **Reconnect** button). Toggle with `tmux.notifications`.
+  has a **Reconnect** button). Toggle with `myssh.notifications`.
 - **Double-click to connect** — opens a new terminal editor tab titled
   `SSH: <host>` running `ssh <host>`. Native terminal, no panel clutter.
 - **Resume where you left off** — the last remote working directory is
@@ -44,19 +44,19 @@ the window is attached to a remote host via Remote SSH.
   SSH session. Closing a tab ends only that session.
 - **Reconnect** — if a session drops, a `Connection closed` notification offers
   a one-click **Reconnect** (back into the same last dir).
-- **Copy SSH Command** — the Copy button (and `tmux: Copy SSH Command`) puts
+- **Copy SSH Command** — the Copy button (and `MySSH: Copy SSH Command`) puts
   `ssh <host>` on the clipboard.
 
 ### Keyboard shortcuts (sidebar)
 
 Use the list without the mouse: ↑/↓ move the selection, **Enter** connects, and
-**Find** (default `ctrl+f`, configurable via `tmux.keys.find`) focuses the
+**Find** (default `ctrl+f`, configurable via `myssh.keys.find`) focuses the
 search box.
 
 ### Metadata
 
 `last connected` is stamped on every connect (stored in `globalState`).
-`last dir` is stored in a local temp file (`<tmp>/tmux-lastdirs.json`) so the
+`last dir` is stored in a local temp file (`<tmp>/myssh-lastdirs.json`) so the
 next session can resume there.
 
 To capture `last dir`, the session is started as
@@ -73,30 +73,30 @@ macOS, and Linux).
 
 ## Commands
 
-| Command             | Title             |
-| ------------------- | ----------------- |
-| `tmux.refreshHosts` | Refresh Hosts     |
-| `tmux.searchHosts`  | Search Hosts      |
-| `tmux.connectHost`  | Connect           |
-| `tmux.copyCommand`  | Copy SSH Command  |
-| `tmux.openConfig`   | Open SSH Config   |
-| `tmux.showHidden`   | Show Hidden Hosts |
-| `tmux.hideHidden`   | Hide Hidden Hosts |
+| Command               | Title             |
+| --------------------- | ----------------- |
+| `myssh.refreshHosts`  | Refresh Hosts     |
+| `myssh.searchHosts`   | Search Hosts      |
+| `myssh.connectHost`   | Connect           |
+| `myssh.copyCommand`   | Copy SSH Command  |
+| `myssh.openConfig`    | Open SSH Config   |
+| `myssh.showHidden`    | Show Hidden Hosts |
+| `myssh.hideHidden`    | Hide Hidden Hosts |
 
 All are available in the Command Palette.
 
 ## Settings
 
-| Setting              | Default  | Description                                       |
-| -------------------- | -------- | ------------------------------------------------- |
-| `tmux.notifications` | `true`   | Toast when an SSH session connects or disconnects. |
-| `tmux.keys.find`     | `ctrl+f` | Sidebar shortcut to focus the search box.          |
+| Setting               | Default  | Description                                        |
+| --------------------- | -------- | -------------------------------------------------- |
+| `myssh.notifications` | `true`   | Toast when an SSH session connects or disconnects. |
+| `myssh.keys.find`     | `ctrl+f` | Sidebar shortcut to focus the search box.          |
 
 ## Remote SSH compatibility
 
 Because of `"extensionKind": ["ui"]`, the extension is **never installed on the
 remote server**. It runs in the local extension host, reads the **local** SSH
-config, and launches `ssh` from the **local** machine — so the `tmux` icon and
+config, and launches `ssh` from the **local** machine — so the `MySSH` icon and
 all sessions keep working while the window is connected to a remote host.
 
 Each session is driven by a `Pseudoterminal`: the `ssh` process is spawned with
@@ -108,32 +108,28 @@ the remote.
 
 ## Install
 
-**VS Code** — search `tmux` in the Extensions view, or:
+**VS Code** — search `MySSH` in the Extensions view, or:
 
 ```bash
-code --install-extension mihirbhadak.mihir-bhadak-tmux
+code --install-extension mihirbhadak.myssh
 ```
 
 **Cursor** — Cursor installs from
-[Open VSX](https://open-vsx.org/extension/mihirbhadak/mihir-bhadak-tmux)
-rather than the VS Code Marketplace; search `tmux` in the Extensions view, or:
+[Open VSX](https://open-vsx.org/extension/mihirbhadak/myssh)
+rather than the VS Code Marketplace; search `MySSH` in the Extensions view, or:
 
 ```bash
-cursor --install-extension mihirbhadak.mihir-bhadak-tmux
+cursor --install-extension mihirbhadak.myssh
 ```
-
-> The extension is listed as **tmux**, but its identifier is
-> `mihirbhadak.mihir-bhadak-tmux`: Marketplace extension names are globally
-> unique and `tmux` is already taken by another publisher.
 
 ### From a .vsix
 
 ```bash
-git clone https://github.com/mihirbhadak/tmux.git
-cd tmux
+git clone https://github.com/mihirbhadak/MySSH.git
+cd MySSH
 npm install
 npm run package
-code --install-extension tmux-<version>.vsix   # or: cursor --install-extension
+code --install-extension myssh-<version>.vsix   # or: cursor --install-extension
 ```
 
 Or: Extensions view → `...` menu → **Install from VSIX…**
