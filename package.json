@@ -1,0 +1,132 @@
+{
+  "name": "tmux",
+  "displayName": "tmux",
+  "description": "Lightweight SSH host sidebar that opens SSH sessions as terminal editor tabs. Runs locally even over Remote SSH.",
+  "version": "0.7.0",
+  "publisher": "local",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onView:tmux.hosts"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "tmux",
+          "title": "tmux",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "tmux": [
+        {
+          "id": "tmux.hosts",
+          "name": "Hosts",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "tmux.refreshHosts",
+        "title": "Refresh Hosts",
+        "category": "tmux",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "tmux.searchHosts",
+        "title": "Search Hosts",
+        "category": "tmux",
+        "icon": "$(search)"
+      },
+      {
+        "command": "tmux.connectHost",
+        "title": "Connect",
+        "category": "tmux"
+      },
+      {
+        "command": "tmux.copyCommand",
+        "title": "Copy SSH Command",
+        "category": "tmux"
+      },
+      {
+        "command": "tmux.openConfig",
+        "title": "Open SSH Config",
+        "category": "tmux",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "tmux.showHidden",
+        "title": "Show Hidden Hosts",
+        "category": "tmux",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "tmux.hideHidden",
+        "title": "Hide Hidden Hosts",
+        "category": "tmux",
+        "icon": "$(eye-closed)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "tmux.showHidden",
+          "when": "view == tmux.hosts && !tmux.showHidden",
+          "group": "navigation@2"
+        },
+        {
+          "command": "tmux.hideHidden",
+          "when": "view == tmux.hosts && tmux.showHidden",
+          "group": "navigation@2"
+        },
+        {
+          "command": "tmux.refreshHosts",
+          "when": "view == tmux.hosts",
+          "group": "navigation@3"
+        },
+        {
+          "command": "tmux.openConfig",
+          "when": "view == tmux.hosts",
+          "group": "navigation@4"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "tmux",
+      "properties": {
+        "tmux.notifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a notification when an SSH session connects or disconnects."
+        },
+        "tmux.keys.find": {
+          "type": "string",
+          "default": "ctrl+f",
+          "markdownDescription": "Sidebar shortcut to focus the search box."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.0",
+    "@types/vscode": "^1.93.0",
+    "typescript": "^5.4.0"
+  }
+}
