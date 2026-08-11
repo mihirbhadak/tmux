@@ -2,10 +2,20 @@
   "name": "tmux",
   "displayName": "tmux",
   "description": "Lightweight SSH host sidebar that opens SSH sessions as terminal editor tabs. Runs locally even over Remote SSH.",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "publisher": "local",
   "private": true,
   "license": "MIT",
+  "author": "Mihir Bhadak <mihirbhadak@gmail.com>",
+  "keywords": [
+    "ssh",
+    "tmux",
+    "terminal",
+    "remote",
+    "ssh-config",
+    "vscode-extension",
+    "cursor"
+  ],
   "engines": {
     "vscode": "^1.93.0"
   },

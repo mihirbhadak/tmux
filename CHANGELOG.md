@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.7.1
+
+- Published to npm as [`@mihir_bhadak/tmux`](https://www.npmjs.com/package/@mihir_bhadak/tmux).
+- Added a `LICENSE` file (the manifest already declared MIT), plus `author`,
+  `keywords`, `repository`, `homepage` and `bugs` metadata.
+- Docs: removed a stale note about `src/webviewTerminal.ts` and an
+  `@xterm/xterm` dependency, both dropped in 0.4.0; documented the three
+  commands and two settings that were missing; added install instructions that
+  no longer reference a hard-coded 0.1.0 vsix.
+
 ## 0.7.0
 
 - Pin/Unpin and Hide/Unhide moved to a **right-click context menu** (with

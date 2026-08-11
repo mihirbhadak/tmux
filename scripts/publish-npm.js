@@ -12,7 +12,7 @@ const { spawnSync } = require('child_process');
 
 const NPM_NAME = '@mihir_bhadak/tmux';
 const ROOT = path.join(__dirname, '..');
-const INCLUDE = ['out', 'resources', 'README.md', 'CHANGELOG.md'];
+const INCLUDE = ['out', 'resources', 'README.md', 'CHANGELOG.md', 'LICENSE'];
 
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
 
@@ -32,7 +32,10 @@ for (const entry of INCLUDE) {
 
 // `private` guards the source manifest against an accidental bare `npm publish`
 // in the project root; the staged copy is the only thing meant to go out.
-const staged = { ...manifest, name: NPM_NAME };
+//
+// `files` lives here rather than in the source manifest because vsce refuses to
+// run when a package.json "files" property and a .vscodeignore both exist.
+const staged = { ...manifest, name: NPM_NAME, files: INCLUDE };
 delete staged.private;
 
 fs.writeFileSync(path.join(stage, 'package.json'), JSON.stringify(staged, null, 2) + '\n');

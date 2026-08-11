@@ -1,5 +1,8 @@
 # tmux
 
+[![npm](https://img.shields.io/npm/v/@mihir_bhadak/tmux)](https://www.npmjs.com/package/@mihir_bhadak/tmux)
+[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
 A lightweight VS Code / Cursor extension that lists the SSH hosts from your
 local `~/.ssh/config` in the Activity Bar and opens each one as its own
 terminal **editor tab** — `SSH: prod`, `SSH: staging`, `SSH: dev` — all in the
@@ -69,14 +72,24 @@ macOS, and Linux).
 
 ## Commands
 
-| Command              | Title              |
-| -------------------- | ------------------ |
-| `tmux.refreshHosts`  | Refresh Hosts      |
-| `tmux.searchHosts`   | Search Hosts       |
-| `tmux.connectHost`   | Connect            |
-| `tmux.copyCommand`   | Copy SSH Command   |
+| Command             | Title             |
+| ------------------- | ----------------- |
+| `tmux.refreshHosts` | Refresh Hosts     |
+| `tmux.searchHosts`  | Search Hosts      |
+| `tmux.connectHost`  | Connect           |
+| `tmux.copyCommand`  | Copy SSH Command  |
+| `tmux.openConfig`   | Open SSH Config   |
+| `tmux.showHidden`   | Show Hidden Hosts |
+| `tmux.hideHidden`   | Hide Hidden Hosts |
 
 All are available in the Command Palette.
+
+## Settings
+
+| Setting              | Default  | Description                                       |
+| -------------------- | -------- | ------------------------------------------------- |
+| `tmux.notifications` | `true`   | Toast when an SSH session connects or disconnects. |
+| `tmux.keys.find`     | `ctrl+f` | Sidebar shortcut to focus the search box.          |
 
 ## Remote SSH compatibility
 
@@ -92,29 +105,64 @@ the session runs **locally** even when the window is attached to a remote — a
 `ssh.exe does not exist` on a Linux server). No extension code or `ssh` runs on
 the remote.
 
+## Install
+
+The extension is not on the VS Code Marketplace; install it from a `.vsix`.
+
+Build one from source:
+
+```bash
+git clone https://github.com/mihirbhadak/tmux.git
+cd tmux
+npm install
+npx @vscode/vsce package --no-dependencies
+```
+
+Then install the `tmux-<version>.vsix` it produces:
+
+```bash
+code --install-extension tmux-0.7.1.vsix
+# Cursor:
+cursor --install-extension tmux-0.7.1.vsix
+```
+
+Or: Extensions view → `...` menu → **Install from VSIX…**
+
+### From npm
+
+The compiled extension is also published to npm:
+
+```bash
+npm install @mihir_bhadak/tmux
+```
+
+Note this is a distribution channel only — VS Code loads extensions from a
+`.vsix`, not from `node_modules`, so installing the npm package does not
+install the extension. Use it to vendor the build output; use the `.vsix`
+above to actually run it.
+
 ## Build
 
 ```bash
 npm install
-npm run compile
+npm run compile   # or: npm run watch
 ```
 
-## Package
+Press `F5` in VS Code to launch an Extension Development Host.
+
+## Publishing
 
 ```bash
-npm install -g @vscode/vsce   # one-time
-vsce package
+npm run publish:npm            # publishes @mihir_bhadak/tmux
+npm run publish:npm -- --otp=123456
 ```
 
-This produces `tmux-0.1.0.vsix`. Install it locally:
-
-```bash
-code --install-extension tmux-0.1.0.vsix
-# Cursor:
-cursor --install-extension tmux-0.1.0.vsix
-```
-
-Or: Extensions view → `...` menu → **Install from VSIX…**
+The VS Code manifest requires `name` to be a plain identifier, so `vsce`
+rejects a scoped name. `scripts/publish-npm.js` therefore stages the build
+output into a temp directory with a rewritten manifest and publishes from
+there, leaving `package.json` untouched. The source manifest is marked
+`private` so a stray `npm publish` in the project root cannot publish the
+unscoped name by accident.
 
 ## Notes / design choices
 
@@ -126,8 +174,9 @@ Or: Extensions view → `...` menu → **Install from VSIX…**
 - **Pane resize:** the remote pty is sized to the tab on connect and on resize
   (once past auth). On a non-POSIX remote the `stty`/`cd` bootstrap is skipped
   behaviour-wise but the shell still starts.
-- `src/webviewTerminal.ts` is an xterm.js-based fallback used only on hosts that
-  predate the terminal editor API; `@xterm/xterm` is the single dependency it
-  needs, loaded straight from `node_modules` (no build step).
 - The parser reads the main config file only; `Include` directives are not
   expanded.
+
+## License
+
+[MIT](LICENSE) © Mihir Bhadak
