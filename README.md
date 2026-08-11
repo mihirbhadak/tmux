@@ -1,7 +1,7 @@
 # tmux
 
-[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/mihirbhadak.tmux?label=VS%20Code%20Marketplace)](https://marketplace.visualstudio.com/items?itemName=mihirbhadak.tmux)
-[![Open VSX](https://img.shields.io/open-vsx/v/mihirbhadak/tmux?label=Open%20VSX)](https://open-vsx.org/extension/mihirbhadak/tmux)
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/mihirbhadak.mihir-bhadak-tmux?label=VS%20Code%20Marketplace)](https://marketplace.visualstudio.com/items?itemName=mihirbhadak.mihir-bhadak-tmux)
+[![Open VSX](https://img.shields.io/open-vsx/v/mihirbhadak/mihir-bhadak-tmux?label=Open%20VSX)](https://open-vsx.org/extension/mihirbhadak/mihir-bhadak-tmux)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 A lightweight VS Code / Cursor extension that lists the SSH hosts from your
@@ -111,15 +111,20 @@ the remote.
 **VS Code** — search `tmux` in the Extensions view, or:
 
 ```bash
-code --install-extension mihirbhadak.tmux
+code --install-extension mihirbhadak.mihir-bhadak-tmux
 ```
 
-**Cursor** — Cursor installs from [Open VSX](https://open-vsx.org/extension/mihirbhadak/tmux)
+**Cursor** — Cursor installs from
+[Open VSX](https://open-vsx.org/extension/mihirbhadak/mihir-bhadak-tmux)
 rather than the VS Code Marketplace; search `tmux` in the Extensions view, or:
 
 ```bash
-cursor --install-extension mihirbhadak.tmux
+cursor --install-extension mihirbhadak.mihir-bhadak-tmux
 ```
+
+> The extension is listed as **tmux**, but its identifier is
+> `mihirbhadak.mihir-bhadak-tmux`: Marketplace extension names are globally
+> unique and `tmux` is already taken by another publisher.
 
 ### From a .vsix
 

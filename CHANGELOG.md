@@ -3,7 +3,11 @@
 ## 0.7.1
 
 - First published release: VS Code Marketplace and Open VSX (Cursor) as
-  `mihirbhadak.tmux`. `publisher` is no longer the `local` placeholder.
+  `mihirbhadak.mihir-bhadak-tmux`. `publisher` is no longer the `local`
+  placeholder. The extension is still displayed as **tmux** — only the
+  identifier changed, because Marketplace names are globally unique and `tmux`
+  is held by another publisher. Extension names allow only lowercase letters,
+  digits and hyphens (no `@`, `/` or `_`).
 - Added a 128×128 PNG Marketplace icon; the Marketplace rejects SVG icons, so
   `resources/icon.svg` stays the themeable 24×24 Activity Bar glyph and
   `resources/icon-source.svg` is the artwork the PNG is rendered from.
